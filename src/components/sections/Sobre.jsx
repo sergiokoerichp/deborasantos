@@ -3,7 +3,7 @@ import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { HiAcademicCap, HiHeart, HiSparkles } from 'react-icons/hi'
 import { FaInstagram } from 'react-icons/fa'
-import DraDebora from '../../assets/images/FotoDaDraDebora.svg'
+import DraDebora from '../../assets/images/FotoDaDraDebora.webp'
 
 const highlights = [
   {

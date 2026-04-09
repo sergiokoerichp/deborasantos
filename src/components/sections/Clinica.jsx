@@ -1,6 +1,10 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { HiLocationMarker, HiClock, HiPhone, HiHeart, HiEye, HiStar } from 'react-icons/hi'
+import foto1 from '../../assets/images/fotoconsultorio1.webp'
+import foto2 from '../../assets/images/fotoconsultorio2.webp'
+import foto3 from '../../assets/images/fotoconsultorio3.webp'
+import foto4 from '../../assets/images/fotoconsultorio4.webp'
 
 const GOOGLE_MAPS_EMBED =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3535.9!2d-48.5685!3d-27.5833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95273856e8d5b5a7%3A0x0!2sR.%20Dr.%20Heitor%20Blum%2C%20310%20-%20Estreito%2C%20Florian%C3%B3polis%20-%20SC%2C%2088075-110!5e0!3m2!1spt-BR!2sbr'
@@ -23,7 +27,7 @@ const contactInfo = [
   },
 ]
 
-const placeholders = [0, 1, 2]
+const fotos = [foto1, foto2, foto3, foto4]
 
 function Clinica() {
   const ref = useRef(null)
@@ -78,17 +82,23 @@ function Clinica() {
         </div>
 
         {/* ── Parte 2: Galeria de fotos ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {placeholders.map((i) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          {fotos.map((src, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + i * 0.12 }}
-              className="aspect-[4/3] rounded-2xl bg-gold/20 border border-gold/20
+              className="aspect-[4/3] rounded-2xl overflow-hidden border border-gold/20
                          hover:border-gold/50 transition-all duration-500
                          hover:shadow-xl hover:shadow-gold/10 hover:scale-[1.02]"
-            />
+            >
+              <img
+                src={src}
+                alt={`Consultório foto ${i + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
           ))}
         </div>
 

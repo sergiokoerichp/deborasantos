@@ -6,6 +6,7 @@ const navLinks = [
   { name: 'Sobre', href: '#sobre' },
   { name: 'Consultório', href: '#clinica' },
   { name: 'Serviços', href: '#servicos' },
+  { name: 'Resultados', href: '#resultados' },
   { name: 'Avaliações', href: '#depoimentos' },
 ]
 
