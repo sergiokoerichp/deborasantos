@@ -1,7 +1,53 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { HiArrowDown } from 'react-icons/hi'
+import limpezadentalHeroVideo from '../../assets/videos/limpezadental-hero.mp4'
+import senhoraespelhoHeroVideo from '../../assets/videos/senhoraespelho-hero.mp4'
+import heroPoster from '../../assets/videos/hero-poster.webp'
 
 function Hero() {
+  const [enableVideoBackground, setEnableVideoBackground] = useState(false)
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const heroVideoSequence = [
+    { src: limpezadentalHeroVideo, objectPosition: '50% center' },
+    { src: senhoraespelhoHeroVideo, objectPosition: '72% center' },
+  ]
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection
+
+    const updateVideoPolicy = () => {
+      const prefersReducedMotion = mediaQuery.matches
+      const savesData = Boolean(connection?.saveData)
+      setEnableVideoBackground(!prefersReducedMotion && !savesData)
+    }
+
+    updateVideoPolicy()
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', updateVideoPolicy)
+    } else {
+      mediaQuery.addListener(updateVideoPolicy)
+    }
+
+    if (connection?.addEventListener) {
+      connection.addEventListener('change', updateVideoPolicy)
+    }
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener('change', updateVideoPolicy)
+      } else {
+        mediaQuery.removeListener(updateVideoPolicy)
+      }
+
+      if (connection?.removeEventListener) {
+        connection.removeEventListener('change', updateVideoPolicy)
+      }
+    }
+  }, [])
+
   const handleScrollToAbout = () => {
     const aboutSection = document.querySelector('#sobre')
     if (aboutSection) {
@@ -14,40 +60,38 @@ function Hero() {
       id="inicio"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background with gradient */}
-      <div className="absolute inset-0 gradient-cream" />
-
-      {/* Decorative organic shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Top right leaf shape */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-          animate={{ opacity: 0.08, scale: 1, rotate: 0 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-          className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-forest"
-          style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Base background */}
+        <div className="absolute inset-0 gradient-cream z-0" />
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-40 scale-105 z-0"
+          style={{ backgroundImage: `url(${heroPoster})` }}
+          aria-hidden="true"
         />
 
-        {/* Bottom left leaf shape */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
-          animate={{ opacity: 0.05, scale: 1, rotate: 0 }}
-          transition={{ duration: 1.5, delay: 0.7 }}
-          className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-terracotta"
-          style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}
-        />
+        {/* Responsive hero video */}
+        {enableVideoBackground && (
+          <video
+            key={heroVideoSequence[currentVideoIndex].src}
+            className="absolute inset-0 h-full w-full object-cover z-0"
+            style={{ objectPosition: heroVideoSequence[currentVideoIndex].objectPosition }}
+            autoPlay
+            muted
+            playsInline
+            preload="metadata"
+            poster={heroPoster}
+            aria-hidden="true"
+            onEnded={() => {
+              setCurrentVideoIndex((previousIndex) => (previousIndex + 1) % heroVideoSequence.length)
+            }}
+          >
+            <source src={heroVideoSequence[currentVideoIndex].src} type="video/mp4" />
+          </video>
+        )}
 
-        {/* Center decorative circle */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.03 }}
-          transition={{ duration: 2, delay: 1 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border-2 border-forest-dark"
-        />
+        {/* Readability overlay */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-br from-forest-dark/30 via-cream/75 to-forest-dark/30" />
       </div>
-
-      {/* Noise overlay for texture */}
-      <div className="absolute inset-0 noise-overlay" />
 
       {/* Main content */}
       <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center">
