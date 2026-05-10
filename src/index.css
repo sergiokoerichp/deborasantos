@@ -9,65 +9,90 @@
 
   body {
     @apply bg-cream text-forest-dark font-body;
+    accent-color: #AB4922;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid #AB4922;
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-terracotta-dark text-cream px-8 py-4 rounded-full font-body font-semibold
-           transition-all duration-300 hover:bg-terracotta hover:shadow-lg hover:shadow-terracotta/30
-           hover:-translate-y-1 active:translate-y-0;
+    @apply inline-flex items-center gap-3 bg-terracotta-dark text-cream px-8 py-4 rounded-soft font-body font-medium tracking-wider uppercase text-sm
+           transition-all duration-300 hover:bg-terracotta hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-secondary {
-    @apply border-2 border-terracotta-dark text-terracotta-dark px-8 py-4 rounded-full font-body font-semibold
+    @apply inline-flex items-center gap-3 border border-terracotta-dark text-terracotta-dark px-8 py-4 rounded-soft font-body font-medium tracking-wider uppercase text-sm
            transition-all duration-300 hover:bg-terracotta-dark hover:text-cream;
   }
 
+  .btn-link {
+    @apply inline-flex items-center gap-2 text-forest-dark font-body text-sm tracking-widest uppercase
+           border-b border-forest-dark/40 pb-1
+           transition-colors duration-300 hover:text-terracotta-dark hover:border-terracotta-dark;
+  }
+
   .section-title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-forest-dark;
+    @apply text-4xl md:text-5xl lg:text-6xl font-display font-light text-forest-dark;
+    letter-spacing: -0.02em;
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-forest font-body;
+    @apply text-lg md:text-xl text-forest font-body leading-relaxed;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-body text-xs tracking-[0.3em] uppercase text-forest;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background-color: #DCA15D;
+  }
+
+  .editorial-numeral {
+    @apply font-display font-light text-gold;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer utilities {
-  .text-shadow {
-    text-shadow: 2px 2px 4px rgba(39, 54, 23, 0.1);
-  }
-
-  .gradient-cream {
-    background: linear-gradient(135deg, #FEFADF 0%, #DCA15D20 50%, #FEFADF 100%);
-  }
-
   .gradient-forest {
     background: linear-gradient(135deg, #273617 0%, #5F6C37 100%);
   }
 
-  /* Organic blob shape */
-  .blob-shape {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  .filete-gold::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background-color: #DCA15D;
+    margin-top: 1rem;
   }
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FEFADF;
+  background: #F6F1E7;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #5F6C37;
-  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -16,10 +16,10 @@ function App() {
       <main>
         <Hero />
         <Sobre />
-        <Clinica />
-        <Tratamentos />
         <Resultados />
         <Avaliacoes />
+        <Tratamentos />
+        <Clinica />
         <Contato />
       </main>
       <Footer />

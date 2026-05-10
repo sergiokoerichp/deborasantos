@@ -3,7 +3,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 
 // Dados de contato reais
 const WHATSAPP_NUMBER = '5548991979007'
-const WHATSAPP_MESSAGE = 'Olá! Gostaria de agendar uma consulta com a Dra. Debora Santos.'
+const WHATSAPP_MESSAGE = 'Olá! Gostaria de agendar uma avaliação com a Dra. Débora Santos.'
 
 function WhatsAppButton() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`

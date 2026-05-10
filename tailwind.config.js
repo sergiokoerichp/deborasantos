@@ -12,15 +12,18 @@ export default {
           DEFAULT: '#BC6C25',
         },
         'gold': '#DCA15D',
-        'cream': '#FEFADF',
+        'cream': '#F6F1E7',
         'forest': {
           dark: '#273617',
           DEFAULT: '#5F6C37',
         }
       },
       fontFamily: {
-        'display': ['Gilda Display', 'serif'],
-        'body': ['Lato', 'sans-serif'],
+        'display': ['"Cormorant Garamond"', 'serif'],
+        'body': ['Inter', 'sans-serif'],
+      },
+      borderRadius: {
+        'soft': '4px',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

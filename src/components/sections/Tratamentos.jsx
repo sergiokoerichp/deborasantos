@@ -1,47 +1,41 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import {
-  HiSun,
-  HiAdjustments,
-  HiPlusCircle,
-  HiUser,
-  HiViewGrid,
-  HiLocationMarker,
-} from 'react-icons/hi'
+
+const WHATSAPP_URL = 'https://wa.me/5548991979007?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20com%20a%20Dra.%20D%C3%A9bora%20Santos.'
 
 const tratamentos = [
   {
-    icon: HiSun,
+    numeral: '01',
     title: 'Clareamento Dental',
     description:
       'Devolva o brilho natural do seu sorriso com técnicas seguras e eficazes de clareamento profissional.',
   },
   {
-    icon: HiAdjustments,
+    numeral: '02',
     title: 'Implantes Dentários',
     description:
       'Soluções modernas e duradouras para substituição de dentes perdidos, devolvendo função e estética.',
   },
   {
-    icon: HiPlusCircle,
+    numeral: '03',
     title: 'Lentes de Contato Dental',
     description:
       'Transforme seu sorriso com lentes ultrafinas que corrigem cor, forma e pequenas imperfeições.',
   },
   {
-    icon: HiUser,
+    numeral: '04',
     title: 'Harmonização Orofacial',
     description:
       'Procedimentos estéticos que equilibram e realçam a harmonia do seu rosto de forma natural.',
   },
   {
-    icon: HiViewGrid,
+    numeral: '05',
     title: 'Ortodontia',
     description:
       'Alinhamento dental com aparelhos convencionais ou invisíveis para um sorriso perfeito.',
   },
   {
-    icon: HiLocationMarker,
+    numeral: '06',
     title: 'Próteses Dentárias',
     description:
       'Próteses personalizadas com acabamento natural para restaurar a funcionalidade e beleza do seu sorriso.',
@@ -54,21 +48,15 @@ function Tratamentos() {
 
   return (
     <section id="servicos" className="py-24 lg:py-32 bg-cream relative overflow-hidden">
-      {/* Decorative background element */}
-      <div
-        className="absolute top-0 left-0 w-1/3 h-full bg-gold/5"
-        style={{ clipPath: 'polygon(0 0, 100% 0, 0% 100%)' }}
-      />
-
       <div ref={ref} className="container mx-auto px-6 lg:px-12 relative">
 
         {/* Header */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <div className="mb-16 max-w-3xl">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-2 bg-terracotta/10 rounded-full text-terracotta text-sm font-body tracking-widest uppercase mb-6"
+            className="eyebrow mb-6"
           >
             Serviços
           </motion.span>
@@ -77,10 +65,9 @@ function Tratamentos() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="section-title mb-6"
+            className="section-title mb-6 mt-6"
           >
-            Nossos{' '}
-            <span className="text-terracotta">Tratamentos</span>
+            Tratamentos
           </motion.h2>
 
           <motion.p
@@ -89,38 +76,33 @@ function Tratamentos() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="section-subtitle"
           >
-            Oferecemos uma gama completa de serviços odontológicos com foco em
-            qualidade, conforto e resultados excepcionais.
+            Cada procedimento é avaliado caso a caso, com critério clínico e foco
+            em saúde, função e naturalidade.
           </motion.p>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        {/* Lista editorial — filete inferior, sem card */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 mb-16">
           {tratamentos.map((item, index) => (
-            <motion.div
+            <motion.article
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="bg-cream border border-forest/10 rounded-2xl p-8 shadow-sm
-                         hover:shadow-lg hover:shadow-gold/10 hover:border-gold/30
-                         transition-all duration-300 relative overflow-hidden group"
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.08 }}
+              className="flex gap-6 py-8 border-b border-forest/15 group"
             >
-              {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-gold/20 rounded-br-none rounded-tl-none rounded-tr-2xl" />
-
-              {/* Icon */}
-              <div className="w-14 h-14 bg-terracotta/10 rounded-xl flex items-center justify-center mb-6">
-                <item.icon className="w-7 h-7 text-terracotta-dark" />
-              </div>
-
-              <h3 className="font-display text-xl font-semibold text-forest-dark mb-3">
-                {item.title}
-              </h3>
-              <p className="font-body text-forest/70 leading-relaxed text-sm">
-                {item.description}
+              <p className="editorial-numeral text-3xl md:text-4xl flex-shrink-0 w-16 group-hover:text-terracotta-dark transition-colors duration-300">
+                {item.numeral}
               </p>
-            </motion.div>
+              <div className="flex-1">
+                <h3 className="font-display text-2xl md:text-3xl font-light text-forest-dark mb-2 group-hover:text-terracotta-dark transition-colors duration-300">
+                  {item.title}
+                </h3>
+                <p className="font-body text-forest/80 leading-relaxed text-sm md:text-base max-w-md">
+                  {item.description}
+                </p>
+              </div>
+            </motion.article>
           ))}
         </div>
 
@@ -132,12 +114,12 @@ function Tratamentos() {
           className="text-center"
         >
           <a
-            href="https://wa.me/5548991979007?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20com%20a%20Dra.%20Debora%20Santos."
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            Agende sua Avaliação
+            Agendar avaliação
           </a>
         </motion.div>
 

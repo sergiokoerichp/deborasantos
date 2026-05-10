@@ -1,25 +1,48 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { HiAcademicCap, HiHeart, HiSparkles } from 'react-icons/hi'
 import { FaInstagram } from 'react-icons/fa'
 import DraDebora from '../../assets/images/FotoDaDraDebora.webp'
 
 const highlights = [
   {
-    icon: HiAcademicCap,
+    numeral: '01',
     title: 'Formação',
     description: 'Graduada pela UFSC e especialização em Prótese e Dentística, com foco em reabilitação oral.',
   },
   {
-    icon: HiHeart,
+    numeral: '02',
     title: 'Dedicação',
     description: 'Escuta atenta, cuidado genuíno e um atendimento pensado para as necessidades de cada paciente.',
   },
   {
-    icon: HiSparkles,
-    title: 'Excelência',
+    numeral: '03',
+    title: 'Critério',
     description: 'Planejamento preciso, técnicas atuais e foco em resultados estéticos e funcionais.',
+  },
+]
+
+const pilares = [
+  {
+    numeral: '01',
+    title: 'Missão',
+    text: 'Unir saúde bucal e estética com planejamento visível, cuidado gentil e precisão — para um sorriso saudável, funcional, natural e duradouro.',
+  },
+  {
+    numeral: '02',
+    title: 'Visão',
+    text: 'Ser referência em odontologia que combina ciência, tecnologia e sensibilidade, com resultados naturais que respeitam saúde, função e individualidade.',
+  },
+  {
+    numeral: '03',
+    title: 'Valores',
+    items: [
+      'Saúde em primeiro lugar',
+      'Planejamento e previsibilidade',
+      'Função e naturalidade',
+      'Cuidado humano',
+      'Critério no detalhe',
+      'Transparência e confiança',
+    ],
   },
 ]
 
@@ -29,12 +52,6 @@ function About() {
 
   return (
     <section id="sobre" className="py-24 lg:py-32 bg-cream relative overflow-hidden">
-      {/* Decorative element */}
-      <div
-        className="absolute top-0 right-0 w-1/3 h-full bg-gold/5"
-        style={{ clipPath: 'polygon(100% 0, 0% 100%, 100% 100%)' }}
-      />
-
       <div className="container mx-auto px-6 lg:px-12">
         <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Image Column */}
@@ -42,41 +59,36 @@ function About() {
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="relative"
+            className="relative max-w-md mx-auto lg:max-w-none"
           >
-            {/* Blob background */}
+            {/* Moldura impressa: retângulo de gold/8% deslocado */}
             <div
-              className="absolute inset-0 bg-gradient-to-br from-terracotta/20 to-gold/30 -rotate-6 scale-105"
-              style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}
+              className="absolute inset-0 bg-gold/10 translate-x-6 translate-y-6"
+              aria-hidden="true"
             />
 
-            {/* Image container with organic shape */}
-            <div
-              className="relative overflow-hidden shadow-2xl"
-              style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}
-            >
+            {/* Image — retângulo vertical, canto reto */}
+            <div className="relative overflow-hidden aspect-[4/5]">
               <img
                 src={DraDebora}
-                alt="Dra. Debora Santos"
-                className="w-full h-auto object-cover"
+                alt="Retrato editorial da Dra. Débora Santos em consultório"
+                className="w-full h-full object-cover"
               />
+              {/* Filete dourado lateral como assinatura */}
+              <div className="absolute top-0 left-0 w-px h-full bg-gold" aria-hidden="true" />
             </div>
 
-            {/* Instagram badge */}
-            <div className="absolute bottom-6 right-6 flex items-center gap-3 bg-cream/95 backdrop-blur-sm rounded-full px-5 py-3 shadow-lg">
-              <span className="text-forest/70 text-base font-body"><strong>Acompanhe no insta:</strong></span>
-              <a
-                href="https://www.instagram.com/dra.deboracsantos/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400
-                           rounded-xl flex items-center justify-center text-white
-                           hover:scale-110 transition-transform"
-                aria-label="Instagram"
-              >
-                <FaInstagram className="w-5 h-5" />
-              </a>
-            </div>
+            {/* Instagram link discreto, monocromático forest-dark */}
+            <a
+              href="https://www.instagram.com/dra.deboracsantos/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-3 text-forest-dark hover:text-terracotta-dark transition-colors duration-300 font-body text-sm tracking-widest uppercase"
+              aria-label="Instagram da Dra. Débora Santos"
+            >
+              <FaInstagram className="w-4 h-4" />
+              <span>@dra.deboracsantos</span>
+            </a>
           </motion.div>
 
           {/* Content Column */}
@@ -85,57 +97,86 @@ function About() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="inline-block px-4 py-2 bg-terracotta/10 rounded-full text-terracotta text-sm font-body tracking-widest uppercase mb-6">
-              Sobre
-            </span>
+            <span className="eyebrow mb-8">Sobre</span>
 
-            <h2 className="section-title mb-6">
-              Conheça<br />
-              <span className="text-terracotta">Débora Santos</span>
+            <h2 className="section-title mb-8 mt-4">
+              Quem cuida<br />
+              de você
             </h2>
 
-            <div className="space-y-4 text-forest font-body leading-relaxed mb-10">
+            <div className="space-y-4 text-forest font-body leading-relaxed mb-12">
               <p>
-                <strong>Oi! Eu sou a Dra. Débora Santos.</strong><br></br>
-                Sou cirurgiã-dentista formada pela <strong>Universidade Federal de Santa Catarina (UFSC)</strong> e especializanda 
-                em <strong>Prótese e Dentística, com ênfase em Reabilitação Oral.</strong> Também atuo como clínica geral, porque 
-                acredito que um sorriso bonito precisa, antes de tudo, ser <strong>saudável e funcional.</strong>
+                Sou cirurgiã-dentista formada pela Universidade Federal de Santa Catarina (UFSC) e especializanda em <strong>Prótese e Dentística com ênfase em Reabilitação Oral</strong>. Atuo também como clínica geral, porque um sorriso bonito precisa, antes de tudo, ser saudável e funcional.
               </p>
               <p>
-                Meu trabalho é guiado por um princípio simples: <strong>entender você, planejar com cuidado e executar com 
-                precisão.</strong> Cada tratamento é pensado de forma personalizada, com atenção aos detalhes e foco em 
-                resultados <strong>naturais, confortáveis e duradouros.</strong>
+                Meu trabalho é guiado por um princípio simples: entender você, planejar com cuidado e executar com precisão. Cada tratamento é pensado de forma personalizada, com atenção aos detalhes e foco em resultados naturais, confortáveis e duradouros.
               </p>
               <p>
-                Seja bem-vindo(a) ao meu espaço. Aqui, <strong>saúde e estética caminham juntas</strong>, com um atendimento acolhedor 
-                e um planejamento que traz segurança em cada etapa.
-              </p>
-              <p>
-                <strong>Planejamento que você vê. Resultado que você sente. Naturalidade que permanece.</strong>
+                Aqui, saúde e estética caminham juntas — com atendimento acolhedor e um planejamento que traz segurança em cada etapa.
               </p>
             </div>
 
-            {/* Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {/* Highlights — numerais editoriais, sem ícone, sem caixa */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-forest/10">
               {highlights.map((item, index) => (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="text-center p-4"
                 >
-                  <div className="w-12 h-12 mx-auto mb-3 bg-gold/20 rounded-full flex items-center justify-center">
-                    <item.icon className="w-6 h-6 text-terracotta-dark" />
-                  </div>
-                  <h4 className="font-display text-lg font-bold text-forest-dark mb-1">
+                  <p className="editorial-numeral text-4xl mb-3">{item.numeral}</p>
+                  <h4 className="font-display text-xl text-forest-dark mb-2">
                     {item.title}
                   </h4>
-                  <p className="text-sm text-forest/70">{item.description}</p>
+                  <p className="text-sm text-forest/80 leading-relaxed">{item.description}</p>
                 </motion.div>
               ))}
             </div>
           </motion.div>
+        </div>
+
+        {/* Pilares — tipografia editorial, sem cards */}
+        <div className="mt-24 pt-16 border-t border-forest/15">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="eyebrow mb-12"
+          >
+            Pilares
+          </motion.span>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mt-12">
+            {pilares.map((p, index) => (
+              <motion.div
+                key={p.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+              >
+                <p className="editorial-numeral text-4xl mb-4">{p.numeral}</p>
+                <h4 className="font-display text-2xl text-forest-dark mb-4">
+                  {p.title}
+                </h4>
+                {p.text && (
+                  <p className="font-body text-forest/80 leading-relaxed">
+                    {p.text}
+                  </p>
+                )}
+                {p.items && (
+                  <ul className="space-y-3">
+                    {p.items.map((item) => (
+                      <li key={item} className="flex items-start gap-3 font-body text-forest/80 leading-relaxed">
+                        <span className="text-gold font-display text-lg leading-none mt-1" aria-hidden="true">—</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

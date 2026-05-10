@@ -4,10 +4,10 @@ import Logo from '../../assets/images/LogoCream.svg'
 const navLinks = [
   { name: 'Início', href: '#inicio' },
   { name: 'Sobre', href: '#sobre' },
-  { name: 'Consultório', href: '#clinica' },
-  { name: 'Serviços', href: '#servicos' },
   { name: 'Resultados', href: '#resultados' },
   { name: 'Avaliações', href: '#depoimentos' },
+  { name: 'Serviços', href: '#servicos' },
+  { name: 'Consultório', href: '#clinica' },
 ]
 
 const socialLinks = [
@@ -66,8 +66,9 @@ function Footer() {
             <div className="space-y-4 text-cream/80 font-body text-sm">
               <p>
                 <span className="text-gold">Endereço:</span><br />
-                R. Dr. Heitor Blum, 310<br />
-                Estreito - Florianópolis/SC
+                Rua Dr. Heitor Blum, 310 — sala 907<br />
+                Vitória Office · Estreito<br />
+                Florianópolis/SC · CEP 88075-110
               </p>
               <p>
                 <span className="text-gold">Horário:</span><br />
@@ -76,12 +77,12 @@ function Footer() {
               </p>
               <p>
                 <span className="text-gold">WhatsApp:</span><br />
-                (48) 9 9197-9007
+                (48) 99197-9007
               </p>
             </div>
 
-            {/* Social Links */}
-            <div className="flex gap-4 mt-6">
+            {/* Social Links — ícones simples, sem caixa */}
+            <div className="flex gap-6 mt-6">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
@@ -89,8 +90,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full bg-forest flex items-center justify-center
-                           text-cream/70 hover:text-cream hover:bg-terracotta transition-all duration-300"
+                  className="text-cream/70 hover:text-gold transition-colors duration-300"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
